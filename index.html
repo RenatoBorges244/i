@@ -17,11 +17,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       min-height: 100vh;
       text-align: center;
       padding: 2rem;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
     }
     h1 {
       font-size: 2.2rem;
@@ -104,7 +105,7 @@
   <div class="hearts" id="hearts"></div>
 
   <div id="container">
-    <img id="imagem" src="https://i.imgur.com/47bZdjP.png" alt="Imagem Dia" />
+    <img id="imagem" src="https://i.pinimg.com/736x/39/0b/fd/390bfd3b245b1ce9e786324c6ce2fc3d.jpg" alt="Imagem Dia" />
     <h1>Um Dia Com Você 💛</h1>
     <p id="texto">
       Esse é um dia que ainda não vivemos... mas eu sonho com ele.
@@ -123,7 +124,7 @@
         Preparei nosso café da manhã favorito e deixei um bilhetinho na sua xícara:<br><br>
         <em>“Hoje vai ser um daqueles dias que a gente lembra sorrindo.”</em><br><br>
         Só porque começa com você.`,
-        imagem: "https://i.imgur.com/47bZdjP.png"
+        imagem: "https://i.pinimg.com/736x/61/93/12/619312e3e39cb14be329d7e6daebf24c.jpg"
       },
       {
         titulo: "Tarde",
@@ -131,7 +132,7 @@
         A gente anda sem rumo, rindo à toa, falando de tudo e de nada.<br><br>
         Seu olhar encontra o meu no meio do silêncio e diz mais do que mil palavras.<br><br>
         O tempo parece desacelerar… e, pela primeira vez, isso é bom.`,
-        imagem: "https://i.imgur.com/9bNZZRO.png"
+        imagem: "https://i.pinimg.com/736x/72/9d/dc/729ddc9053421f8c4a104302afd55060.jpg"
       },
       {
         titulo: "Noite",
@@ -139,19 +140,20 @@
         A gente dividiu uma coberta, um chocolate, um filme, e um milhão de pensamentos.<br><br>
         A vida lá fora sumiu…<br><br>
         Porque a gente criou um mundo só nosso.`,
-        imagem: "https://i.imgur.com/CZzPSZX.png"
+        imagem: "https://i.pinimg.com/736x/7c/4a/64/7c4a641e4591426b6bb0056c92db4ab2.jpg"
       },
       {
         titulo: "Final",
         texto: `Esse dia ainda não aconteceu...<br><br>
         Mas eu sonho com ele. Com cada detalhe, cada riso, cada instante ao seu lado.<br><br>
-        Quero viver esse dia com você — de verdade.<br><br>
+        Quero viver esse dia com você, de verdade.<br><br>
         E se só de imaginar já me faz sorrir, viver tudo isso com você...
         vai ser meu pedaço favorito da realidade. 💛<br><br>
         <strong>Obrigado por viver esse dia imaginário comigo.</strong><br>
         <em>Com carinho, de quem pensa em você com o coração inteiro...</em><br><br>
-        E sim... eu te amo. ❤️`,
-        imagem: "https://i.imgur.com/I0b8Op8.png",
+        E sim... eu te amo. ❤️
+        João Gabriel♥️ `,
+        imagem: "https://i.pinimg.com/736x/ed/d8/d8/edd8d829c46dbe3a42f0f7a2bd69ee19.jpg",
         final: true
       }
     ];
@@ -225,11 +227,19 @@
     let perguntaAtual = 0;
 
     function iniciarQuiz() {
-      document.getElementById("container").style.display = "none";
-      const quiz = document.getElementById("quiz");
-      quiz.style.display = "flex";
-      mostrarPergunta();
-    }
+  document.getElementById("container").style.display = "none";
+  const quiz = document.getElementById("quiz");
+  quiz.style.display = "flex";
+  quiz.innerHTML = `
+    <h2>Você Consegue Me Decifrar? 🧩</h2>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">
+      Agora que vivemos esse dia imaginário juntos... quero te propor um pequeno desafio.<br><br>
+      Vou te fazer 4 perguntas, todas fofas, todas com carinho. 💛<br>
+      Não tem resposta errada, cada escolha revela algo sobre o que sinto por você.
+    </p>
+    <button onclick="mostrarPergunta()">Começar o desafio ➡️</button>
+  `;
+}
 
     function mostrarPergunta() {
       const quiz = document.getElementById("quiz");
@@ -266,13 +276,23 @@
     }
 
     function mostrarFinal() {
-      const quiz = document.getElementById("quiz");
-      quiz.innerHTML = `
-        <h2>Talvez você nunca me decifre por completo...</h2>
-        <p>Mas tudo bem. Porque quero te mostrar, dia após dia, quem eu sou com você.<br><br>
-        E te amar do meu jeitinho, com todas as minhas entrelinhas. 💛</p>
-      `;
-    }
+  const quiz = document.getElementById("quiz");
+  quiz.innerHTML = `
+    <h2>Você chegou até o fim... 💛</h2>
+    <p style="margin-top: 1rem; font-size: 1.2rem; line-height: 1.6">
+      Talvez você nunca me decifre por completo, e tudo bem...<br><br>
+      Eu não quero ser um mistério impossível, só quero que você sinta, cada vez mais, o quanto eu gosto de você.<br><br>
+      Eu amo a leveza que temos, os risos espontâneos, os momentos doidos e os silenciosos também.<br><br>
+      Quero viver todos esses dias com você, os reais, os imaginários e os que ainda vamos inventar.<br><br>
+      Obrigado por me deixar entrar no seu coração, aos pouquinhos.<br><br>
+      Eu prometo cuidar, sentir, e continuar tentando te decifrar... todos os dias.
+      <br><br>João Gabriel ❤️
+    </p>
+    
+  `;
+  document.getElementById("playerContainer").style.display = "block";
+
+}
 
     function criarCorações() {
       const container = document.getElementById("hearts");
@@ -288,5 +308,17 @@
     }
     criarCorações();
   </script>
+  <div id="playerContainer" style="display: none; margin-top: 2rem;">
+  <h3>🎶 Uma música que combina com esse momento...</h3>
+  <iframe 
+    width="320" height="180"
+    src="https://www.youtube.com/embed/rTsbSY04s1Y?autoplay=1&rel=0"
+    title="Chuva de Arroz - Luan Santana"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
 </body>
 </html>
+
