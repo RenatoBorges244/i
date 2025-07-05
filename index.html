@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Um Dia Com Você 💛</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: linear-gradient(to bottom, #fff0f5, #ffe5ec);
+      color: #5f0f40;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.2rem;
+      max-width: 650px;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    button {
+      background-color: #ffb3c1;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background-color: #ff9aa2;
+    }
+    #imagem {
+      width: 220px;
+      margin-bottom: 1.5rem;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #ffd6dc60;
+    }
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .heart {
+      position: absolute;
+      color: #ff9aa2;
+      animation: floatUp 6s linear infinite;
+      font-size: 20px;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 0;
+      }
+    }
+    .quiz {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      max-width: 600px;
+      margin-top: 2rem;
+    }
+    .option {
+      background-color: #ffd6dc;
+      margin: 0.5rem;
+      padding: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .option:hover {
+      background-color: #ffb3c1;
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <div id="container">
+    <img id="imagem" src="https://i.imgur.com/47bZdjP.png" alt="Imagem Dia" />
+    <h1>Um Dia Com Você 💛</h1>
+    <p id="texto">
+      Esse é um dia que ainda não vivemos... mas eu sonho com ele.
+    </p>
+    <button id="nextButton" onclick="proximaEtapa()">Começar o dia ☀️</button>
+  </div>
+
+  <div class="quiz" id="quiz"></div>
+
+  <script>
+    const etapas = [
+      {
+        titulo: "Manhã",
+        texto: `Bom dia, minha princesa. ☀️<br><br>
+        Acordar com você por perto é como ter o sol dentro do peito.<br><br>
+        Preparei nosso café da manhã favorito e deixei um bilhetinho na sua xícara:<br><br>
+        <em>“Hoje vai ser um daqueles dias que a gente lembra sorrindo.”</em><br><br>
+        Só porque começa com você.`,
+        imagem: "https://i.imgur.com/47bZdjP.png"
+      },
+      {
+        titulo: "Tarde",
+        texto: `A tarde é leve quando você tá comigo.<br><br>
+        A gente anda sem rumo, rindo à toa, falando de tudo e de nada.<br><br>
+        Seu olhar encontra o meu no meio do silêncio e diz mais do que mil palavras.<br><br>
+        O tempo parece desacelerar… e, pela primeira vez, isso é bom.`,
+        imagem: "https://i.imgur.com/9bNZZRO.png"
+      },
+      {
+        titulo: "Noite",
+        texto: `A noite chegou e você tá encostada em mim.<br><br>
+        A gente dividiu uma coberta, um chocolate, um filme, e um milhão de pensamentos.<br><br>
+        A vida lá fora sumiu…<br><br>
+        Porque a gente criou um mundo só nosso.`,
+        imagem: "https://i.imgur.com/CZzPSZX.png"
+      },
+      {
+        titulo: "Final",
+        texto: `Esse dia ainda não aconteceu...<br><br>
+        Mas eu sonho com ele. Com cada detalhe, cada riso, cada instante ao seu lado.<br><br>
+        Quero viver esse dia com você — de verdade.<br><br>
+        E se só de imaginar já me faz sorrir, viver tudo isso com você...
+        vai ser meu pedaço favorito da realidade. 💛<br><br>
+        <strong>Obrigado por viver esse dia imaginário comigo.</strong><br>
+        <em>Com carinho, de quem pensa em você com o coração inteiro...</em><br><br>
+        E sim... eu te amo. ❤️`,
+        imagem: "https://i.imgur.com/I0b8Op8.png",
+        final: true
+      }
+    ];
+
+    let etapaAtual = -1;
+
+    function proximaEtapa() {
+      etapaAtual++;
+      const titulo = document.querySelector("h1");
+      const texto = document.getElementById("texto");
+      const botao = document.getElementById("nextButton");
+      const imagem = document.getElementById("imagem");
+
+      if (etapaAtual < etapas.length) {
+        titulo.textContent = `Parte do Dia: ${etapas[etapaAtual].titulo}`;
+        texto.innerHTML = etapas[etapaAtual].texto;
+        imagem.src = etapas[etapaAtual].imagem;
+        if (etapas[etapaAtual].final) {
+          botao.style.display = 'inline-block';
+          botao.textContent = "Queria te propor algo 💌";
+          botao.onclick = iniciarQuiz;
+        } else {
+          botao.textContent = "Próxima parte ➡️";
+        }
+      }
+    }
+
+    const quizData = [
+      {
+        pergunta: "O que eu mais gosto em você?",
+        opcoes: [
+          "Seu sorriso",
+          "Sua voz",
+          "Seu jeitinho bobo",
+          "Tudo isso junto 💛"
+        ],
+        resposta: "Não importa a escolha... tudo em você me encanta."
+      },
+      {
+        pergunta: "Se eu pudesse te dar algo agora, o que seria?",
+        opcoes: [
+          "Um abraço",
+          "Uma flor",
+          "Um bilhete",
+          "Um dia inteiro ao seu lado"
+        ],
+        resposta: "Qualquer escolha seria pouco perto do que eu sinto."
+      },
+      {
+        pergunta: "O que mais me encanta em nós dois?",
+        opcoes: [
+          "A leveza",
+          "O riso fácil",
+          "A conexão sem esforço",
+          "O que ainda está por vir…"
+        ],
+        resposta: "A gente é bonito até no silêncio."
+      },
+      {
+        pergunta: "Se eu pudesse congelar um momento com você, qual seria?",
+        opcoes: [
+          "Quando você sorri sem perceber",
+          "Quando me abraça de repente",
+          "Quando encosta em mim sem dizer nada",
+          "Quando simplesmente está aqui"
+        ],
+        resposta: "Com você, qualquer momento vira eternidade."
+      }
+    ];
+
+    let perguntaAtual = 0;
+
+    function iniciarQuiz() {
+      document.getElementById("container").style.display = "none";
+      const quiz = document.getElementById("quiz");
+      quiz.style.display = "flex";
+      mostrarPergunta();
+    }
+
+    function mostrarPergunta() {
+      const quiz = document.getElementById("quiz");
+      quiz.innerHTML = "";
+      const q = quizData[perguntaAtual];
+
+      const h2 = document.createElement("h2");
+      h2.innerText = q.pergunta;
+      quiz.appendChild(h2);
+
+      q.opcoes.forEach(op => {
+        const btn = document.createElement("div");
+        btn.className = "option";
+        btn.innerText = op;
+        btn.onclick = () => mostrarResposta(q.resposta);
+        quiz.appendChild(btn);
+      });
+    }
+
+    function mostrarResposta(resposta) {
+      const quiz = document.getElementById("quiz");
+      quiz.innerHTML = `<p><strong>${resposta}</strong></p>`;
+      const next = document.createElement("button");
+      next.innerText = perguntaAtual === quizData.length - 1 ? "Finalizar 💛" : "Próxima pergunta ➡️";
+      next.onclick = () => {
+        perguntaAtual++;
+        if (perguntaAtual < quizData.length) {
+          mostrarPergunta();
+        } else {
+          mostrarFinal();
+        }
+      };
+      quiz.appendChild(next);
+    }
+
+    function mostrarFinal() {
+      const quiz = document.getElementById("quiz");
+      quiz.innerHTML = `
+        <h2>Talvez você nunca me decifre por completo...</h2>
+        <p>Mas tudo bem. Porque quero te mostrar, dia após dia, quem eu sou com você.<br><br>
+        E te amar do meu jeitinho, com todas as minhas entrelinhas. 💛</p>
+      `;
+    }
+
+    function criarCorações() {
+      const container = document.getElementById("hearts");
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+        heart.innerText = "💖";
+        container.appendChild(heart);
+        setTimeout(() => container.removeChild(heart), 7000);
+      }, 600);
+    }
+    criarCorações();
+  </script>
+</body>
+</html>
